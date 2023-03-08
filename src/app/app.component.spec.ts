@@ -1,11 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { CourseFormComponent } from './components/course-form/course-form.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        CourseFormComponent
       ],
     }).compileComponents();
   });
@@ -22,10 +24,4 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('angular-nested-form-poc');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('angular-nested-form-poc app is running!');
-  });
 });
