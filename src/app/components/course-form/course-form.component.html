@@ -1,12 +1,12 @@
 <h1>Kurzusok</h1>
 
-<form [formGroup]="courseForm">
+<form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
   <div class="row mb-2">
     <label class="col-sm" for="course-name">Kurzus neve</label>
     <input
       class="col-sm"
       id="course-name"
-      name="courseNameValue"
+      name="courseName"
       [formControl]="courseForm.controls.courseName"
       type="text"
     />
@@ -16,41 +16,19 @@
     <input
       class="col-sm"
       id="gsheet-id"
-      name="gsheetIdValue"
+      name="gsheetId"
       type="text"
       [formControl]="courseForm.controls.gsheetId"
     />
   </div>
 
   <section id="days-section">
-    <div *ngFor="let day of days" class="row my-2">
-      <input
-        class="col-sm"
-        type="checkbox"
-        [name]="day + 'CheckboxValue'"
-        [id]="day + '-checkbox'"
-        [formControl]="getIsDayFormControlByDay(day)"
-        />
-        <span class="col-sm">{{ day }}</span>
-        <input
-        class="col-sm"
-        [name]="day + 'Value'"
-        [id]="day + '-value'"
-        [formControl]="getHoursFormControlByDay(day)"
-        type="number"
-      />
-    </div>
+    <app-days-form [daysForm]="courseForm.controls.days"></app-days-form>
   </section>
 
   <div class="row mt-4">
     <div class="col-sm">
-      <button
-        id="submit-btn"
-        class="btn btn-primary"
-        (click)="onSubmit($event)"
-      >
-        Submit
-      </button>
+      <button id="submit-btn" class="btn btn-primary">Submit</button>
     </div>
   </div>
 </form>

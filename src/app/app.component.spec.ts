@@ -1,13 +1,20 @@
+import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { CourseFormComponent } from './components/course-form/course-form.component';
+
+@Component({
+  selector: 'app-course-form',
+  template: '<div id="course-form"></div>',
+})
+export class MockCourseFormComponent {
+}
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        CourseFormComponent
+        MockCourseFormComponent
       ],
     }).compileComponents();
   });
