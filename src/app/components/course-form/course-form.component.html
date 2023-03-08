@@ -1,28 +1,42 @@
 <h1>Kurzusok</h1>
 
-<form #courseForm>
+<form [formGroup]="courseForm">
   <div class="row mb-2">
     <label class="col-sm" for="course-name">Kurzus neve</label>
-    <input class="col-sm" id="course-name" name="courseNameValue" type="text" />
+    <input
+      class="col-sm"
+      id="course-name"
+      name="courseNameValue"
+      [formControl]="courseForm.controls.courseName"
+      type="text"
+    />
   </div>
   <div class="row">
     <label class="col-sm" for="gsheet-id">GSheet Id</label>
-    <input class="col-sm" id="gsheet-id" name="gsheetIdValue" type="text" />
+    <input
+      class="col-sm"
+      id="gsheet-id"
+      name="gsheetIdValue"
+      type="text"
+      [formControl]="courseForm.controls.gsheetId"
+    />
   </div>
 
-  <section id="weeks-section">
-    <div *ngFor="let week of weeks" class="row my-2">
+  <section id="days-section">
+    <div *ngFor="let day of days" class="row my-2">
       <input
         class="col-sm"
         type="checkbox"
-        [name]="week.toLowerCase() + 'CheckboxValue'"
-        [id]="week.toLowerCase() + '-checkbox'"
-      />
-      <span class="col-sm">{{ week }}</span>
-      <input
+        [name]="day + 'CheckboxValue'"
+        [id]="day + '-checkbox'"
+        [formControl]="getIsDayFormControlByDay(day)"
+        />
+        <span class="col-sm">{{ day }}</span>
+        <input
         class="col-sm"
-        [name]="week.toLowerCase() + 'Value'"
-        [id]="week.toLowerCase() + '-value'"
+        [name]="day + 'Value'"
+        [id]="day + '-value'"
+        [formControl]="getHoursFormControlByDay(day)"
         type="number"
       />
     </div>

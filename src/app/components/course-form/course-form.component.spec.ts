@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CourseFormComponent } from './course-form.component';
 
 describe('CourseFormComponent', () => {
@@ -8,7 +8,8 @@ describe('CourseFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CourseFormComponent ]
+      declarations: [ CourseFormComponent ],
+      imports: [FormsModule, ReactiveFormsModule]
     })
     .compileComponents();
 
@@ -26,23 +27,32 @@ describe('CourseFormComponent', () => {
     
     const courseNameInput = fixture.nativeElement.querySelector('input[name="courseNameValue"]');
     courseNameInput.value = 'Angular TDD';
+    courseNameInput.dispatchEvent(new Event('input'));
     
     const gsheetIdInput = fixture.nativeElement.querySelector('input[name="gsheetIdValue"]');
     gsheetIdInput.value = '1';
+    gsheetIdInput.dispatchEvent(new Event('input'));
     
     const mondayCheckbox = fixture.nativeElement.querySelector('input[name="mondayCheckboxValue"]');
     mondayCheckbox.checked = true;
+    mondayCheckbox.dispatchEvent(new Event('change'));
     
     const mondayInput = fixture.nativeElement.querySelector('input[name="mondayValue"]');
-    mondayInput.value = '3';
+    mondayInput.value = 3;
+    mondayInput.dispatchEvent(new Event('input'));
     
     form.dispatchEvent(new Event('submit'));
     
     fixture.detectChanges();
-    expect(component.getValue()).toEqual({
+
+    let fValue = component.getValue();
+    console.log(fValue); 
+    expect(fValue).toEqual({
       courseName: 'Angular TDD',
       gsheetId: '1',
-      monday: '3',
+      days: [
+        { day: 'Monday', hours: 3 }
+      ]
     });
   });
 });
